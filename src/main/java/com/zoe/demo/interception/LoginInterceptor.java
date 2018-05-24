@@ -33,20 +33,20 @@ public class LoginInterceptor implements HandlerInterceptor {
             userRedis=userRedisService.findByAccount(userCookie.getValue());
             if(userRedis==null){
                 request
-                        .getRequestDispatcher(String.format("%s=%s","/loginFail?info", "缓存不存在"))
+                        .getRequestDispatcher(String.format("/loginFail?info=%s", "缓存不存在"))
                         .forward(request, response);
                 return false;
             }
         }else {
-            request.getRequestDispatcher(String.format("%s=%s","/loginFail?info","cookie不存在")).forward(request,response);
+            request.getRequestDispatcher(String.format("/loginFail?info=%s","cookie不存在(尚未登陆)")).forward(request,response);
             return false;
         }
         if(!userRedis.getAccount().equals(userCookie.getValue())){
-            request.getRequestDispatcher(String.format("%s=%s","/loginFail?info","cookie和redis所存用户名不一致")).forward(request,response);
+            request.getRequestDispatcher(String.format("/loginFail?info=%s","cookie和redis所存用户名不一致")).forward(request,response);
             return false;
         }
         if(new Date().after(userRedis.getDealTime())){
-            request.getRequestDispatcher(String.format("%s=%s","/loginFailure?info","缓存过期")).forward(request,response);
+            request.getRequestDispatcher(String.format("/loginFail?info=%s","缓存过期")).forward(request,response);
             return false;
         }else{
             userRedis.setDealTime(DateUtils.addSeconds(new Date(),time));

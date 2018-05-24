@@ -3,6 +3,8 @@ package com.zoe.demo.controller;
 import com.zoe.demo.common.ResultData;
 import com.zoe.demo.entity.SysPermissionDO;
 import com.zoe.demo.entity.SysRoleDO;
+import com.zoe.demo.entity.dto.PermissionDTO;
+import com.zoe.demo.entity.vo.PermissionVO;
 import com.zoe.demo.service.SysService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -29,19 +31,24 @@ public class SysPermissionController {
     private SysService sysService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResultData addPermission(String permissionCN, String permissionEN){
-        SysPermissionDO sysPermissionDO=new SysPermissionDO(permissionCN,permissionEN);
-        return ResultData.success(sysService.add(sysPermissionDO));
+    @ApiImplicitParam(name="permissionDTO",value = "权限",dataType = "PermissionDTO",paramType = "body")
+    public ResultData addPermission(@RequestBody PermissionDTO permissionDTO){
+        SysPermissionDO sysPermissionDO=new SysPermissionDO(permissionDTO.getPermissionCN(),permissionDTO.getPermissionEN());
+        if(sysService.findByPermissionCNAndPermissionEN(sysPermissionDO)){
+            return ResultData.success("添加成功");
+        }else{
+            return ResultData.error("存在同名权限");
+        }
     }
 
 
     @ApiOperation("权限分页")
     @GetMapping("/page")
     @ApiImplicitParams({
-            @ApiImplicitParam(name="page",value = "当前页",dataType = "Integer",paramType = "query"),
-            @ApiImplicitParam(name="size",value = "每页个数",dataType = "Integer",paramType = "query")
+            @ApiImplicitParam(name="page",value = "当前页",defaultValue = "0",dataType = "Integer",paramType = "query"),
+            @ApiImplicitParam(name="size",value = "每页个数",defaultValue = "10",dataType = "Integer",paramType = "query")
     })
-    public ResultData getPagePermission(@ApiIgnore @PageableDefault(value = 10,size=10,direction = Sort.Direction.DESC)Pageable pageable){
+    public ResultData getPagePermission( @ApiIgnore@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)Pageable pageable){
         return ResultData.success(sysService.getPermissionPage(pageable));
     }
 
@@ -79,4 +86,8 @@ public class SysPermissionController {
         return ResultData.success("删除成功");
     }
 
+//    @GetMapping("/getPermissionList")
+//    public ResultData getList(){
+//        return ResultData.success(sysService.getPermissionList());
+//    }
 }

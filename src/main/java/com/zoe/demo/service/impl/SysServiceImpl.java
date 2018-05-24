@@ -6,6 +6,7 @@ import com.zoe.demo.dao.SysUserDao;
 import com.zoe.demo.entity.SysPermissionDO;
 import com.zoe.demo.entity.SysRoleDO;
 import com.zoe.demo.entity.SysUserDO;
+import com.zoe.demo.meiju.State;
 import com.zoe.demo.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -120,5 +121,26 @@ public class SysServiceImpl implements SysService {
         return roleDao.findById(id);
     }
 
+    //如果有同名英文或者中文权限就不添加保证权限唯一
+    @Override
+    public boolean findByPermissionCNAndPermissionEN(SysPermissionDO sysPermissionDO) {
+        SysPermissionDO sys=permissionDao.findByPermissionCNOrPermissionEN(sysPermissionDO.getPermissionCN(),sysPermissionDO.getPermissionEN());
+        if(sys!=null){
+            return false;
+        }else{
+            sysPermissionDO.setDeleted(false);
+            permissionDao.save(sysPermissionDO);
+            return true;
+        }
+    }
 
+    @Override
+    public List<SysUserDO> findByUserStateEquals(State state) {
+        return userDao.findByUserStateEquals(state);
+    }
+
+    @Override
+    public int deleteById(Long id) {
+        return userDao.deleteById(id);
+    }
 }

@@ -46,8 +46,8 @@ public class UserOperationController {
     @ApiOperation("登陆")
     @GetMapping("/login")
     @ApiImplicitParams({
-            @ApiImplicitParam(name="account",value = "帐户名",defaultValue = "cyl",paramType = "query",dataType = "String"),
-            @ApiImplicitParam(name = "password",value = "密码",defaultValue = "123456",paramType = "query",dataType = "String")
+            @ApiImplicitParam(name="account",value = "帐户名",defaultValue = "leeaoyuan",paramType = "query",dataType = "String"),
+            @ApiImplicitParam(name = "password",value = "密码",defaultValue = "111111",paramType = "query",dataType = "String")
     })
     public ResultData login(String account, String password, HttpServletResponse response) throws ParseException {
         SysUserDO sysUserDO=sysService.findByAccount(account);

@@ -4,11 +4,13 @@ import com.zoe.demo.common.ResultData;
 import com.zoe.demo.entity.SysPermissionDO;
 import com.zoe.demo.entity.SysRoleDO;
 import com.zoe.demo.entity.SysUserDO;
+import com.zoe.demo.entity.dto.RoleDTO;
 import com.zoe.demo.service.SysService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -31,11 +33,12 @@ public class SysRoleController {
     @PostMapping
     @ApiOperation("角色添加")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sysRoleDO",value = "角色",dataType = "SysRoleDO",paramType = "body"),
+            @ApiImplicitParam(name = "roleDTO",value = "角色(id不需要)",dataType = "RoleDTO",paramType = "body"),
             @ApiImplicitParam(name = "permissionIds",value = "权限id",dataType = "Long",paramType = "query")
     })
-    public ResultData addRole(@RequestBody SysRoleDO sysRoleDO, Long[] permissionIds){
-        if(sysRoleDO.getRoleName()==null||sysRoleDO.getRoleType()==null){
+    public ResultData addRole(@RequestBody RoleDTO roleDTO, Long[] permissionIds){
+        SysRoleDO sysRoleDO=new SysRoleDO(roleDTO.getRoleName(),roleDTO.getRoleType());
+         if(sysRoleDO.getRoleName()==null||sysRoleDO.getRoleType()==null){
             return ResultData.error("角色名或类型为空");
         }
         if(permissionIds==null){
@@ -55,10 +58,10 @@ public class SysRoleController {
     @ApiOperation("角色分页")
     @GetMapping("/page")
     @ApiImplicitParams({
-            @ApiImplicitParam(name="page",value = "当前页",dataType = "Integer",paramType = "query"),
-            @ApiImplicitParam(name="size",value = "每页个数",dataType = "Integer",paramType = "query")
+            @ApiImplicitParam(name="page",value = "当前页",defaultValue = "0",dataType = "Integer",paramType = "query"),
+            @ApiImplicitParam(name="size",value = "每页个数",defaultValue = "10",dataType = "Integer",paramType = "query")
     })
-    public ResultData getRolePage(@ApiIgnore@PageableDefault(value = 10,size=10,direction = Sort.Direction.DESC)Pageable pageable){
+    public ResultData getRolePage(@ApiIgnore @PageableDefault(value = 1,size=10,direction = Sort.Direction.DESC)Pageable pageable){
         return ResultData.success(sysService.getRolePage(pageable));
     }
 
@@ -72,11 +75,18 @@ public class SysRoleController {
     @PutMapping
     @ApiImplicitParams({
             @ApiImplicitParam(name = "permissionIds",value = "权限ids",paramType = "query",dataType = "Long[]"),
-            @ApiImplicitParam(name="sysRoleDO",value = "角色",paramType = "body",dataType = "SysRoleDO")
+            @ApiImplicitParam(name="roleDTO",value = "角色(id需有)",paramType = "body",dataType = "RoleDTO")
     })
-    public ResultData updateRole(@RequestBody SysRoleDO sysRoleDO,Long[] permissionIds){
+    public ResultData updateRole(@RequestBody RoleDTO roleDTO,Long[] permissionIds){
         Set<SysPermissionDO> permission=sysService.findSet(permissionIds);
+        SysRoleDO sysRoleDO=new SysRoleDO(roleDTO.getRoleName(),roleDTO.getRoleType());
+        sysRoleDO.setId(roleDTO.getId());
         sysRoleDO.setPermissions(permission);
+        sysRoleDO.setDeleted(false);//一定要
+        //去重,如果是自身的角色名不碍事（相当于没变)
+        if(sysService.findByRoleName(sysRoleDO.getRoleName()).getId()!=roleDTO.getId()){
+            return ResultData.error("角色名重复");
+        }
         sysService.add(sysRoleDO);
         return ResultData.success("更新成功");
     }

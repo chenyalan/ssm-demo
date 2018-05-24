@@ -27,5 +27,10 @@ public class SysRoleDO extends BaseEntity  implements Serializable {
     @ManyToMany
     @JoinTable(name="sys_role_permission",joinColumns = {@JoinColumn(name = "role_id")},inverseJoinColumns = {@JoinColumn(name = "permission_id")})
     private Set<SysPermissionDO> permissions;
+    public SysRoleDO(){}
+    public SysRoleDO(String roleName,String roleType){
+        this.roleName=roleName;
+        this.roleType=roleType;
+    }
 
 }

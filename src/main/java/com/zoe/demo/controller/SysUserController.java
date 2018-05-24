@@ -7,6 +7,7 @@ import com.zoe.demo.entity.SysUserDO;
 import com.zoe.demo.entity.vo.RegisterVO;
 import com.zoe.demo.entity.vo.UserShowVO;
 import com.zoe.demo.entity.vo.UserVO;
+import com.zoe.demo.meiju.State;
 import com.zoe.demo.service.SysService;
 import com.zoe.demo.utils.JavaMailUtils;
 import com.zoe.demo.utils.PassWordUtils;
@@ -24,7 +25,9 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -78,7 +81,7 @@ public class SysUserController {
         if (bindingResult.hasErrors()) {
             return ResultData.error(bindingResult.getFieldError().getDefaultMessage());
         }
-        if(roleId==null){
+        if(roleId==null||sysService.findByRoleId(roleId)==null){
             return ResultData.error("未分配角色");
         }
         if (sysService.findByAccount(registerVO.getAccount()) != null) {
@@ -156,5 +159,20 @@ public class SysUserController {
         sysUserDO.setDeleted(true);
         sysService.add(sysUserDO);
         return ResultData.success("删除成功");
+    }
+
+
+    @PutMapping
+    public ResultData delete(){
+        List<SysUserDO> sysUserDOList=sysService.findByUserStateEquals(State.Registering);
+        sysUserDOList.forEach(sysUserDO -> {
+            Date now=new Date();
+            Date deadTime = new Date(sysUserDO.getCreateDate().getTime()+ 300000);
+            if(now.after(deadTime)){
+                sysUserDO.setDeleted(true);
+                sysService.add(sysUserDO);
+            }
+        });
+        return ResultData.success(sysUserDOList);
     }
 }

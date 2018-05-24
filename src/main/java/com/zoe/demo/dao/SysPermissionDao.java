@@ -18,4 +18,6 @@ public interface SysPermissionDao extends JpaRepository<SysPermissionDO,Long> {
     @Query(value = "select s from SysPermissionDO s where  s.id in ?1")
     Set<SysPermissionDO>  findSet(Long[] ids);
     SysPermissionDO findById(Long id);
+//    @Query(value = "select s from SysPermissionDO s where s.permissionCN=?1 and s.permissionEN=?2")
+    SysPermissionDO findByPermissionCNOrPermissionEN(String permissionCN,String permissionEN);
  }

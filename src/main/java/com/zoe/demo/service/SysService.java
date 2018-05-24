@@ -3,6 +3,7 @@ package com.zoe.demo.service;
 import com.zoe.demo.entity.SysPermissionDO;
 import com.zoe.demo.entity.SysRoleDO;
 import com.zoe.demo.entity.SysUserDO;
+import com.zoe.demo.meiju.State;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -45,4 +46,11 @@ public interface SysService {
 
     //根据id来查询角色
     SysRoleDO findByRoleId(Long id);
+
+    //
+    boolean findByPermissionCNAndPermissionEN(SysPermissionDO sysPermissionDO);
+
+    List<SysUserDO> findByUserStateEquals(State state);
+
+    int deleteById(Long id);
 }
