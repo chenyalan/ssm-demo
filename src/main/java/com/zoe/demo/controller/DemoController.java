@@ -1,9 +1,11 @@
 package com.zoe.demo.controller;
 
 import com.google.gson.reflect.TypeToken;
+import com.zoe.demo.common.MyException;
 import com.zoe.demo.common.ResultData;
 import com.zoe.demo.entity.httpdo.HttpDO;
 import com.zoe.demo.utils.HttpUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,5 +29,17 @@ public class DemoController {
             e.printStackTrace();
         }
         return ResultData.error(null);
+    }
+
+
+    @GetMapping("/exception.do")
+    public ResultData helloException() throws Exception{
+        throw new Exception("是Exception");
+    }
+
+
+    @GetMapping("/myException.do")
+    public ResultData helloMyException(){
+        throw new MyException("是MyException");
     }
 }

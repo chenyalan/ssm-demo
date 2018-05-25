@@ -3,11 +3,13 @@ package com.zoe.demo.utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zoe.demo.entity.httpdo.HttpDO;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.util.Map;
 
@@ -87,6 +89,74 @@ public class HttpUtils {
 
         return (T) sb.toString();
     }
+
+
+    public static String httpPut(String urlPath, String data, String charSet, String[] header)
+    {
+        String result = null;
+        URL url = null;
+        HttpURLConnection httpurlconnection = null;
+        try
+        {
+            url = new URL(urlPath);
+            httpurlconnection = (HttpURLConnection) url.openConnection();
+            httpurlconnection.setDoInput(true);
+            httpurlconnection.setDoOutput(true);
+            httpurlconnection.setConnectTimeout(2000000);// 设置连接主机超时（单位：毫秒）
+            httpurlconnection.setReadTimeout(2000000);// 设置从主机读取数据超时（单位：毫秒）
+
+            if (header != null)
+            {
+                for (int i = 0; i < header.length; i++)
+                {
+                    String[] content = header[i].split(":");
+                    httpurlconnection.setRequestProperty(content[0], content[1]);
+                }
+            }
+
+            httpurlconnection.setRequestMethod("PUT");
+            httpurlconnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            if (StringUtils.isNotBlank(data))
+            {
+                httpurlconnection.getOutputStream().write(data.getBytes("UTF-8"));
+            }
+            httpurlconnection.getOutputStream().flush();
+            httpurlconnection.getOutputStream().close();
+            int code = httpurlconnection.getResponseCode();
+
+            if (code == 200)
+            {
+                DataInputStream in = new DataInputStream(httpurlconnection.getInputStream());
+                int len = in.available();
+                byte[] by = new byte[len];
+                in.readFully(by);
+                if (StringUtils.isNotBlank(charSet))
+                {
+                    result = new String(by, Charset.forName(charSet));
+                } else
+                {
+                    result = new String(by);
+                }
+                in.close();
+            } else
+            {
+//                log.error("请求地址：" + urlPath + "返回状态异常，异常号为：" + code);
+            }
+        } catch (Exception e)
+        {
+//            log.error("访问url地址：" + urlPath + "发生异常", e);
+        } finally
+        {
+            url = null;
+            if (httpurlconnection != null)
+            {
+                httpurlconnection.disconnect();
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) throws Exception {
 
 //         String getUrl="http://localhost:1111/user/all?pageNum={0}&pageSize={1}";

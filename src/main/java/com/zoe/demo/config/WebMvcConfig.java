@@ -17,7 +17,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Autowired
     private LoginInterceptor loginInterceptor;
 
-    private String[] unAuthUrl={"/user/login","/user/register","/activeUser","/loginFail","*.html","/sys/register"};
+    private String[] unAuthUrl={"/user/login","/user/register","/activeUser","/loginFail","*.html","/sys/user/register","/sys/user"};
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)

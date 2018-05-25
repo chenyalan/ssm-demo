@@ -1,5 +1,6 @@
-package com.zoe.demo.common;
+package com.zoe.demo.controller;
 
+import com.zoe.demo.common.ResultData;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

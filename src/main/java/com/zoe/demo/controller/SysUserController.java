@@ -162,8 +162,8 @@ public class SysUserController {
     }
 
 
-    @PutMapping
-    public ResultData delete(){
+    @GetMapping
+    public String delete(){
         List<SysUserDO> sysUserDOList=sysService.findByUserStateEquals(State.Registering);
         sysUserDOList.forEach(sysUserDO -> {
             Date now=new Date();
@@ -173,6 +173,6 @@ public class SysUserController {
                 sysService.add(sysUserDO);
             }
         });
-        return ResultData.success(sysUserDOList);
+        return "删除";
     }
 }
