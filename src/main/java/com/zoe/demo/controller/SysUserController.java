@@ -162,6 +162,7 @@ public class SysUserController {
     }
 
 
+    @ApiOperation("定时任务-逻辑删除未注册记录")
     @GetMapping
     public String delete(){
         List<SysUserDO> sysUserDOList=sysService.findByUserStateEquals(State.Registering);
