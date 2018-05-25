@@ -22,6 +22,9 @@ public class GlobalExceptionHandler {
      *  捕获 HtmlException
      */
     public static final String DEFAULT_ERROR_VIEW="error";
+
+    public static final String ERROR_MESSAGE="failure";
+
     @ExceptionHandler(value = HtmlException.class)
     public ModelAndView modelAndView(HttpServletRequest request,HtmlException e){
         ModelAndView mav = new ModelAndView();
@@ -39,9 +42,9 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResultData<String> jsonErrorHandler(HttpServletRequest request, JsonException e){
         ResultData<String> resultData=new ResultData<>();
-        resultData.setMessage(e.getMessage());
+        resultData.setMessage(ERROR_MESSAGE);
         resultData.setCode(400);
-        resultData.setResult("业务异常");
+        resultData.setResult("业务异常-"+e.getMessage());
         resultData.setUrl(request.getRequestURL().toString());
         return resultData;
     }
@@ -51,11 +54,11 @@ public class GlobalExceptionHandler {
     //捕获Exception未知错误
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public ResultData<String> jsonErrorHandler(HttpServletRequest request, Exception e){
+    public ResultData<String> BasicExceptionHandler(HttpServletRequest request, Exception e){
         ResultData<String> resultData=new ResultData<>();
-        resultData.setMessage(e.getMessage());
+        resultData.setMessage(ERROR_MESSAGE);
         resultData.setCode(400);
-        resultData.setResult("不可知异常");
+        resultData.setResult("未知异常-"+e.getMessage());
         resultData.setUrl(request.getRequestURL().toString());
         return resultData;
     }
