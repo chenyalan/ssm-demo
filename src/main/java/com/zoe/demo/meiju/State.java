@@ -1,6 +1,7 @@
 package com.zoe.demo.meiju;
 
-import com.zoe.demo.common.MyException;
+
+import com.zoe.demo.common.JsonException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,7 @@ public enum State implements BaseEnum {
     public static State getByValue(int value){
         State state =valueMap.get(value);
         if(state==null){
-            throw new MyException("没有这个元素");
+            throw new JsonException("没有这个元素");
         }
         return state;
     }

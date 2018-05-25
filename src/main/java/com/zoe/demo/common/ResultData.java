@@ -13,6 +13,15 @@ public class ResultData<T> implements Serializable {
     public static final String ERROR_MESSAGE="failure";
     public static final int SUCCESS_CODE=200;
     public static final int ERROR_CODE=400;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     private String message;
     private int code;

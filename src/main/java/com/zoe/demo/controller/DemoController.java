@@ -1,10 +1,12 @@
 package com.zoe.demo.controller;
 
 import com.google.gson.reflect.TypeToken;
-import com.zoe.demo.common.MyException;
+import com.zoe.demo.common.HtmlException;
+import com.zoe.demo.common.JsonException;
 import com.zoe.demo.common.ResultData;
 import com.zoe.demo.entity.httpdo.HttpDO;
 import com.zoe.demo.utils.HttpUtils;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,14 +34,28 @@ public class DemoController {
     }
 
 
+    /**
+     * 3种错误
+     * @return
+     * @throws Exception
+     */
+
+    @ApiOperation(value = "未知异常-json格式")
     @GetMapping("/exception.do")
     public ResultData helloException() throws Exception{
         throw new Exception("是Exception");
     }
 
 
-    @GetMapping("/myException.do")
-    public ResultData helloMyException(){
-        throw new MyException("是MyException");
+    @ApiOperation(value = "映射error.html")
+    @GetMapping("/htmlException.do")
+    public ResultData htmlException(){
+        throw new HtmlException("是HtmlException");
+    }
+
+    @ApiOperation(value = "业务异常-json格式")
+    @GetMapping("/jsonException.do")
+    public ResultData jsonException(){
+        throw new JsonException("是JsonException");
     }
 }
