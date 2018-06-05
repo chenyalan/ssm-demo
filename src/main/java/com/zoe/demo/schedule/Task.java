@@ -20,7 +20,7 @@ public class Task {
      */
     @Scheduled(cron = "0 0/2 * * * ?")
     public void deleteNoRegister() throws Exception {
-          HttpUtils.get("http://localhost:8888/sys/user", new TypeToken<String>(){});
+          HttpUtils.get("http://localhost:8811/sys/user", new TypeToken<String>(){});
         TimeUnit.SECONDS.sleep(2);
     }
 

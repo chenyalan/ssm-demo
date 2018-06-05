@@ -22,16 +22,16 @@ public class EmpServiceImpl implements EmpService {
     private DeptMapper deptMapper;
     @Override
     public List<Emp> selectAll() {
-        return empMapper.selectAll();
+        return empMapper.selectAllData();
     }
 
     @Override
     public List<Dept> selectDeptAll() {
-        return deptMapper.selectAll();
+        return deptMapper.selectAllData();
     }
 
     @Override
     public List<Dept> annotAll() {
-        return deptMapper.annotAll();
+        return deptMapper.selectAnnot();
     }
 }
