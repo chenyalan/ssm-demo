@@ -7,6 +7,8 @@ import com.zoe.demo.common.ResultData;
 import com.zoe.demo.entity.httpdo.HttpDO;
 import com.zoe.demo.utils.HttpUtils;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +23,10 @@ import java.text.MessageFormat;
 @RestController
 @RequestMapping(value = "/test")
 public class DemoController {
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     @RequestMapping(value = "/gsonType",method = RequestMethod.GET)
     public ResultData<HttpDO> getHttpDO(){
         String getUrl="http://42.123.99.75:20001/api/changcheng/company/news?page={0}&count={1}";
@@ -58,4 +64,5 @@ public class DemoController {
     public ResultData jsonException(){
         throw new JsonException("是JsonException");
     }
+
 }

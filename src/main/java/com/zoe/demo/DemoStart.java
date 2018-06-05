@@ -1,6 +1,7 @@
 package com.zoe.demo;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  */
 @SpringBootApplication
 @EnableCaching
+@EnableAutoConfiguration
 @EnableJpaAuditing //此注解必加因为用了@CreateDate
 @EnableScheduling //定时任务
 public class DemoStart {

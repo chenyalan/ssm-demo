@@ -14,6 +14,14 @@ public class BookEntity {
 
     private String bookName;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getBookName() {
         return bookName;
     }

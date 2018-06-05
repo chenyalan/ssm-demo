@@ -8,4 +8,7 @@ import com.zoe.demo.entity.BookEntity;
  */
 public interface BookService {
     BookEntity add(BookEntity book);
+    BookEntity update(BookEntity bookEntity);
+    void delete(Long id);
+    BookEntity getById(Long id);
 }

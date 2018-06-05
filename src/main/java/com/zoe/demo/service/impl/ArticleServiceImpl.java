@@ -1,12 +1,16 @@
 package com.zoe.demo.service.impl;
 
 import com.zoe.demo.dao.ArticleDao;
+import com.zoe.demo.entity.Article;
 import com.zoe.demo.entity.ArticleDO;
+import com.zoe.demo.mapper.ArticleMapper;
 import com.zoe.demo.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -16,6 +20,10 @@ import org.springframework.stereotype.Service;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleDao articleDao;
+
+    @Autowired
+    private ArticleMapper articleMapper;//mybatis
+
     @Override
     public ArticleDO add(ArticleDO articleDO) {
         return articleDao.save(articleDO);
@@ -52,5 +60,12 @@ public class ArticleServiceImpl implements ArticleService {
             }
         }
         return 1L;
+    }
+
+
+    //mybatis，测试而已
+    @Override
+    public List<Article> selectAll() {
+        return articleMapper.selectAll();
     }
 }

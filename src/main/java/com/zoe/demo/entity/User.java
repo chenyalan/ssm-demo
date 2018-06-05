@@ -1,8 +1,10 @@
 package com.zoe.demo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable{
+    private static final long serialVersionUID = -9206700653885172774L;
     private Integer id;
 
     private Integer deleted;
