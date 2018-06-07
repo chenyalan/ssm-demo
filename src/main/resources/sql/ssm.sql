@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50534
 File Encoding         : 65001
 
-Date: 2018-05-24 17:53:33
+Date: 2018-06-07 10:27:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,20 +28,23 @@ CREATE TABLE `article` (
   `article` varchar(255) DEFAULT NULL,
   `auther` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES ('1', '2018-03-05 11:28:06', null, '2018-03-05 11:28:06', 'photochainnode代码提交pull步骤！！！！.txt', 'chainnode代码提交pull步骤！！！！', 'admin');
-INSERT INTO `article` VALUES ('2', '2018-03-05 11:29:42', null, '2018-03-05 11:29:42', 'photo\\chainnode代码提交pull步骤！！！！.txt', 'chainnode代码提交pull步骤！！！！', 'admin');
+INSERT INTO `article` VALUES ('1', '2018-03-05 11:28:06', '', '2018-03-05 11:28:06', 'photochainnode代码提交pull步骤！！！！.txt', 'chainnode代码提交pull步骤！！！！', 'admin');
+INSERT INTO `article` VALUES ('2', '2018-03-05 11:29:42', '', '2018-03-05 11:29:42', 'photo\\chainnode代码提交pull步骤！！！！.txt', 'chainnode代码提交pull步骤！！！！', 'admin');
 INSERT INTO `article` VALUES ('3', '2018-03-05 11:31:06', '\0', '2018-03-05 11:31:06', 'photo\\chainnode代码提交pull步骤！！！！.txt', 'chainnode代码提交pull步骤！！！！', 'admin');
-INSERT INTO `article` VALUES ('4', '2018-03-05 11:38:10', '\0', '2018-03-05 11:38:10', 'photo\\chainnode代码提交pull步骤！！！！.txt', 'chainnode代码提交pull步骤！！！！', 'admin');
+INSERT INTO `article` VALUES ('4', '2018-03-05 11:38:10', '', '2018-03-05 11:38:10', 'photo\\chainnode代码提交pull步骤！！！！.txt', 'chainnode代码提交pull步骤！！！！', 'admin');
 INSERT INTO `article` VALUES ('5', '2018-03-05 11:39:09', '', '2018-03-06 16:22:57', 'photo\\chainnode代码提交pull步骤！！！！.txt', 'chainnode代码提交pull步骤！！！！', 'admin');
 INSERT INTO `article` VALUES ('6', '2018-03-05 11:53:45', '\0', '2018-03-05 11:53:45', 'photo\\admin\\centos.txt', 'centos', 'admin');
 INSERT INTO `article` VALUES ('7', '2018-03-05 11:58:45', '', '2018-03-06 16:33:35', 'photo\\admin\\12省内涉旅企业数量变更.xlsx', '12省内涉旅企业数量变更', 'admin');
 INSERT INTO `article` VALUES ('8', '2018-03-05 16:43:28', '', '2018-03-06 16:33:35', 'photo\\admin\\bbd软件流程说明.doc', 'bbd软件流程说明', 'admin');
 INSERT INTO `article` VALUES ('9', '2018-03-06 16:08:22', '', '2018-03-06 16:33:35', 'D:\\\\photo\\\\\\发展指数-纵向.png', '发展指数-纵向', 'admin');
+INSERT INTO `article` VALUES ('10', '2018-06-07 09:30:15', '\0', '2018-06-07 09:30:15', 'D:\\\\photo\\\\花名册模版.xlsx', '花名册模版', 'zoe');
+INSERT INTO `article` VALUES ('11', '2018-06-07 09:39:25', '', '2018-06-07 09:39:25', 'D:\\\\photo\\\\花名册模版.xlsx', '花名册模版', 'zoe');
+INSERT INTO `article` VALUES ('12', '2018-06-07 09:45:25', '\0', '2018-06-07 09:45:25', 'D:\\\\photo\\\\任免审批表（模板）.xlsx', '任免审批表（模板）', 'zoe');
 
 -- ----------------------------
 -- Table structure for sys_permission
@@ -55,7 +58,7 @@ CREATE TABLE `sys_permission` (
   `permissioncn` varchar(255) DEFAULT NULL COMMENT '权限中文',
   `permissionen` varchar(255) DEFAULT NULL COMMENT '权限英文',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_permission
@@ -78,6 +81,14 @@ INSERT INTO `sys_permission` VALUES ('15', '2018-05-24 15:06:32', null, '2018-05
 INSERT INTO `sys_permission` VALUES ('16', '2018-05-24 15:07:56', null, '2018-05-24 15:07:56', '测试9', 'test9');
 INSERT INTO `sys_permission` VALUES ('17', '2018-05-24 15:11:01', '\0', '2018-05-24 15:11:01', '测试9', 'test9');
 INSERT INTO `sys_permission` VALUES ('18', '2018-05-24 16:10:04', '', '2018-05-24 16:37:25', 'test111', '测试1111');
+INSERT INTO `sys_permission` VALUES ('19', '2018-06-07 09:50:26', null, '2018-06-07 09:50:26', '', 'string');
+INSERT INTO `sys_permission` VALUES ('20', '2018-06-07 09:50:34', null, '2018-06-07 09:50:34', '', 'string');
+INSERT INTO `sys_permission` VALUES ('21', '2018-06-07 09:50:35', null, '2018-06-07 09:50:35', '', 'string');
+INSERT INTO `sys_permission` VALUES ('22', '2018-06-07 09:50:35', null, '2018-06-07 09:50:35', '', 'string');
+INSERT INTO `sys_permission` VALUES ('23', '2018-06-07 09:50:35', null, '2018-06-07 09:50:35', '', 'string');
+INSERT INTO `sys_permission` VALUES ('24', '2018-06-07 09:50:35', null, '2018-06-07 09:50:35', '', 'string');
+INSERT INTO `sys_permission` VALUES ('25', '2018-06-07 09:50:35', null, '2018-06-07 09:50:35', '', 'string');
+INSERT INTO `sys_permission` VALUES ('26', '2018-06-07 09:54:56', null, '2018-06-07 09:54:56', '', 'string');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -158,7 +169,7 @@ CREATE TABLE `sys_user` (
   PRIMARY KEY (`id`),
   KEY `FK4dm5kxn3potpfgdigehw7pdyu` (`role_id`),
   CONSTRAINT `FK4dm5kxn3potpfgdigehw7pdyu` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user
@@ -176,6 +187,9 @@ INSERT INTO `sys_user` VALUES ('51', '2018-04-19 14:20:40', '', '2018-04-19 14:
 INSERT INTO `sys_user` VALUES ('52', '2018-04-20 10:39:12', '\0', '2018-05-18 11:53:07', 'leeaoyuan', '首尔顶顶顶', '首尔大学', 'sharp_94free@163.com', null, 'd343367543146c9523f0c5d39a894278', null, '1', null, '李袄原', '5', '1', '4hJc', null);
 INSERT INTO `sys_user` VALUES ('53', '2018-04-20 10:19:20', '', '2018-04-20 10:21:32', 'chenyalan', null, null, '2333@qq.com', null, '5476c4308c5426608a5d683a8c368d31', null, '1', '15343434343', '陈亚兰', '5', '1', 't{m9', null);
 INSERT INTO `sys_user` VALUES ('54', '2018-05-24 17:14:56', '', '2018-05-24 17:52:00', 'chen', null, null, 'qwert6750@126.com', null, '75fba71d520c423f58a7c5f1eb1dbf54', null, null, null, 'string', null, '0', 'Qc\\|', null);
+INSERT INTO `sys_user` VALUES ('55', '2018-05-25 11:33:18', '', '2018-05-25 11:40:00', 'chd', null, null, 'qwert6750@126.com', null, '79f31fe2634290219b615b81c64bbf3f', null, null, null, 'chd', '5', '0', 'vEvU', null);
+INSERT INTO `sys_user` VALUES ('56', '2018-05-25 11:42:13', '', '2018-05-25 11:48:00', 'chd', null, null, 'qwert6750@126.com', null, 'a1610716718a8072e34d325fa3a6af91', null, null, null, 'fccc', '5', '0', '4g@Y', null);
+INSERT INTO `sys_user` VALUES ('57', '2018-05-25 11:48:34', '', '2018-05-25 15:54:26', 'chd', null, null, 'qwert6750@126.com', null, '1b5c1e9a2eaa65889aae3a217d55fc0e', null, null, null, 'fccc', '5', '1', 'wSL_', null);
 
 -- ----------------------------
 -- Table structure for tbl_book
@@ -185,8 +199,10 @@ CREATE TABLE `tbl_book` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `book_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_book
 -- ----------------------------
+INSERT INTO `tbl_book` VALUES ('1', '尽快发');
+INSERT INTO `tbl_book` VALUES ('2', '反对反对个');
