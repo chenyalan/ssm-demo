@@ -20,9 +20,9 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleDao articleDao;
-
-    @Autowired
-    private ArticleMapper articleMapper;//mybatis
+//
+//    @Autowired
+//    private ArticleMapper articleMapper;//mybatis
 
     @Override
     public ArticleDO add(ArticleDO articleDO) {
@@ -66,6 +66,12 @@ public class ArticleServiceImpl implements ArticleService {
     //mybatis，测试而已
     @Override
     public List<Article> selectAll() {
-        return articleMapper.selectAll();
+//        return articleMapper.selectAll();
+        return null;
+    }
+
+    @Override
+    public ArticleDO findByAddress(String address) {
+        return articleDao.findByAddress(address);
     }
 }

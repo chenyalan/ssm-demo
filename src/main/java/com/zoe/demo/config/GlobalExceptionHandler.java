@@ -3,9 +3,12 @@ package com.zoe.demo.config;
 import com.zoe.demo.common.HtmlException;
 import com.zoe.demo.common.JsonException;
 import com.zoe.demo.common.ResultData;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,4 +65,22 @@ public class GlobalExceptionHandler {
         resultData.setUrl(request.getRequestURL().toString());
         return resultData;
     }
+
+    /**
+     * 参数绑定时候，不需要再手动必须写BindingResult了
+     * @param e
+     * @param request
+     * @return
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseBody
+    public ResultData<String> illegalParamsExceptionHandler(MethodArgumentNotValidException e,HttpServletRequest request) {
+        ResultData<String> resultData=new ResultData<>();
+        resultData.setMessage(ERROR_MESSAGE);
+        resultData.setCode(87);
+        resultData.setResult("参数"+e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+        resultData.setUrl(request.getRequestURL().toString());
+        return resultData;
+    }
+
 }

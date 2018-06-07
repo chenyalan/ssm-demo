@@ -49,6 +49,9 @@ public class ArticleController {
             fileAddress.mkdir();
         }
         String filePath=baseUrl+fileName;
+        if(articleService.findByAddress(filePath)!=null){
+            return ResultData.error("此文件已经存在");
+        }
         log.info("baseUrl:"+baseUrl+"\tfilePath:"+filePath);
         file.transferTo(new File(filePath));
         ArticleDO articleDO=new ArticleDO(name,"zoe",baseUrl+fileName);

@@ -13,4 +13,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface ArticleDao extends JpaRepository<ArticleDO,Long> {
     @Query(value = "select a from ArticleDO a where a.deleted=0")
     Page getMyArticle(Pageable pageable);
+
+    ArticleDO findByAddress(String address);
 }

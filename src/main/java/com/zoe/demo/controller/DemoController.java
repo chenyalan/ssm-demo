@@ -4,16 +4,19 @@ import com.google.gson.reflect.TypeToken;
 import com.zoe.demo.common.HtmlException;
 import com.zoe.demo.common.JsonException;
 import com.zoe.demo.common.ResultData;
+import com.zoe.demo.entity.SysPermissionDO;
+import com.zoe.demo.entity.dto.PermissionDTO;
 import com.zoe.demo.entity.httpdo.HttpDO;
+import com.zoe.demo.service.SysService;
 import com.zoe.demo.utils.HttpUtils;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.text.MessageFormat;
 
 /**
@@ -23,7 +26,8 @@ import java.text.MessageFormat;
 @RestController
 @RequestMapping(value = "/test")
 public class DemoController {
-
+    @Autowired
+    private SysService sysService;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
@@ -63,6 +67,18 @@ public class DemoController {
     @GetMapping("/jsonException.do")
     public ResultData jsonException(){
         throw new JsonException("是JsonException");
+    }
+
+
+    @PostMapping("/validException.do")
+    @ApiOperation("验证错误")
+    @ApiImplicitParam(name = "permissionDTO",value = "权限",paramType = "body",dataType = "PermissionDTO")
+    public ResultData validError(@RequestBody @Valid PermissionDTO permissionDTO){
+        SysPermissionDO sysPermissionDO=new SysPermissionDO();
+        sysPermissionDO.setPermissionEN(permissionDTO.getPermissionEN());
+        sysPermissionDO.setPermissionCN(permissionDTO.getPermissionCN());
+        return ResultData.success(sysService.add(sysPermissionDO));
+
     }
 
 }

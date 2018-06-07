@@ -19,4 +19,6 @@ public interface ArticleService {
 
     //mybatis
     List<Article>  selectAll();
+
+    ArticleDO findByAddress(String address);
 }
