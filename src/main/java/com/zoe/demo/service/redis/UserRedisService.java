@@ -12,5 +12,5 @@ public interface UserRedisService {
 
     UserRedis save(UserRedis userRedis);
 
-    void delete(String account);
+    void delete(UserRedis userRedis);
 }

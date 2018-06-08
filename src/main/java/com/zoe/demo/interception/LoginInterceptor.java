@@ -1,5 +1,6 @@
 package com.zoe.demo.interception;
 
+import com.zoe.demo.entity.AccountContext;
 import com.zoe.demo.entity.redis.UserRedis;
 import com.zoe.demo.service.redis.UserRedisService;
 import org.apache.commons.lang.time.DateUtils;
@@ -51,6 +52,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }else{
             userRedis.setDealTime(DateUtils.addSeconds(new Date(),time));
             userRedisService.save(userRedis);
+            AccountContext.setContext(userRedis);
         }
         System.out.println("now:"+new Date());
         return true;

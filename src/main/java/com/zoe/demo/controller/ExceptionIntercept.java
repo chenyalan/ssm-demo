@@ -3,6 +3,7 @@ package com.zoe.demo.controller;
 import com.zoe.demo.common.ResultData;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -11,8 +12,8 @@ import springfox.documentation.annotations.ApiIgnore;
  * 拦截器错误汇总
  */
 @RestController
-@ApiIgnore
 public class ExceptionIntercept {
+    @RequestMapping("/loginFail")
     public ResultData getErrorInfo(String info){
         return ResultData.error(info);
     }

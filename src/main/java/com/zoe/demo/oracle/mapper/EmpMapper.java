@@ -17,5 +17,5 @@ public interface EmpMapper {
 
     int updateByPrimaryKey(Emp record);
 
-    List<Emp> selectAllData();
+    List<Emp> selectAll();
 }

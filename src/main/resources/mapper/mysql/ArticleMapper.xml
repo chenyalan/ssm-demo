@@ -114,8 +114,7 @@
       auther = #{auther,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
   <select id="selectAll" resultMap="BaseResultMap">
-    select * FROM ARTICLE
+    select * from article
   </select>
 </mapper>

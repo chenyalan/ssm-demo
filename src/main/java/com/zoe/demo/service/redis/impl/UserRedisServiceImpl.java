@@ -27,7 +27,7 @@ public class UserRedisServiceImpl implements UserRedisService {
     }
 
     @Override
-    public void delete(String account) {
-
+    public void delete(UserRedis userRedis) {
+           userRedisDao.delete(userRedis);
     }
 }

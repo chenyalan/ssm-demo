@@ -5,12 +5,14 @@ server:
     #从数据源-Oracle
 custom:
       datasource:
-        driver-class-name: oracle.jdbc.driver.OracleDriver
+        driverClassName: oracle.jdbc.driver.OracleDriver
         url: jdbc:oracle:thin:@192.168.1.112:1521:ORCL
         username: system
         password: 12345678
 
         #主数据源-Mysql
+
+
 spring:
     datasource:
         name: test
@@ -19,7 +21,7 @@ spring:
         password: root
         # 使用druid数据源
         type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.jdbc.Driver
+        driverClassName: com.mysql.jdbc.Driver  #driver-class-name 的原因是@ConfigProperty会自动来这里取值，而属性username,url,dirverXXX这些是固定的
         filters: stat
         maxActive: 20
         initialSize: 1
@@ -36,8 +38,6 @@ spring:
     jpa:
       hibernate:
         ddl-auto: update
-
-
 
     mail:
       host: smtp.ym.163.com

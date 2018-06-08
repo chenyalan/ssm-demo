@@ -2,6 +2,7 @@ package com.zoe.demo.service;
 
 import com.zoe.demo.entity.Article;
 import com.zoe.demo.entity.ArticleDO;
+import com.zoe.demo.oracle.entity.Emp;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -21,4 +22,6 @@ public interface ArticleService {
     List<Article>  selectAll();
 
     ArticleDO findByAddress(String address);
+
+    List<Emp> selectEmpAll();
 }

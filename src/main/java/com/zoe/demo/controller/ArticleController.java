@@ -1,4 +1,5 @@
 package com.zoe.demo.controller;
+import com.sun.org.apache.xml.internal.serializer.EmptySerializer;
 import com.zoe.demo.common.ResultData;
 import com.zoe.demo.entity.ArticleDO;
 import com.zoe.demo.service.ArticleService;
@@ -86,5 +87,15 @@ public class ArticleController {
             return ResultData.success("删除成功");
         }
         return ResultData.error("删除失败");
+    }
+
+    @GetMapping("/ddd")
+    public ResultData get(){
+        return ResultData.success(articleService.selectAll());
+    }
+
+    @GetMapping("/empAll")
+    public ResultData selectEmpAll(){
+        return ResultData.success(articleService.selectEmpAll());
     }
 }

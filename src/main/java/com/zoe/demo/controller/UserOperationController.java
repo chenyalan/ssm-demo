@@ -17,10 +17,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
@@ -68,8 +65,8 @@ public class UserOperationController {
         int time=30*60;//设置为30分钟
         String token= DigestUtils.md5Hex(userRedis.getAccount()+new Date());
         CookieUtils.addCookie(response,"user",userRedis.getAccount(),time);
-        //设置用户上下文，借助ThreadLocal
-        AccountContext.setContext(userRedis);
+        //设置用户上下文，借助ThreadLocal ,但其实，是因该放在拦截器里的，因为这样子才是同一个请求。
+//        AccountContext.setContext(userRedis);
         return ResultData.success("登陆成功");
     }
 
@@ -91,5 +88,13 @@ public class UserOperationController {
         sysUserDO.setPassword(PassWordUtils.privatePassWord(password,sysUserDO.getSalt()));
         sysService.add(sysUserDO);
         return ResultData.success("修改成功");
+    }
+
+
+    @DeleteMapping
+    public ResultData exit(){
+          UserRedis account=AccountContext.getAccount();
+          userRedisService.delete(account);
+          return ResultData.success("删除成功");
     }
 }

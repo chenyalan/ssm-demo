@@ -125,9 +125,7 @@
       DEPTNO = #{deptno,jdbcType=DECIMAL}
     where EMPNO = #{empno,jdbcType=DECIMAL}
   </update>
-  <select id="selectAllData" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from EMP
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from emp
   </select>
 </mapper>
