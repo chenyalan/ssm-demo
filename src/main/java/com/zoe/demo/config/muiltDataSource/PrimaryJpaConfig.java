@@ -20,7 +20,7 @@ import java.util.Map;
 
 /**
  * Created by 陈亚兰 on 2018/6/11.
- * JPA配置，否则会引起jpa部分不需重写的方法找不到事务管理器。
+ * JPA数据源配置，否则会引起jpa部分不需重写（save,findOne,等)的方法找不到事务管理器。
  */
 @Configuration
 @EnableTransactionManagement
