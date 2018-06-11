@@ -4,6 +4,7 @@ import com.zoe.demo.common.ResultData;
 import com.zoe.demo.entity.ArticleDO;
 import com.zoe.demo.service.ArticleService;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,8 +61,12 @@ public class ArticleController {
         articleService.add(articleDO);
         return ResultData.success(articleDO);
     }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page",value = "当前页",defaultValue = "0",paramType = "query",dataType = "String"),
+            @ApiImplicitParam(name = "size",value = "每页个数",defaultValue = "10",paramType = "query",dataType = "String")
+    })
     @GetMapping("/myArticle")
-    public ResultData getMyArticle(@PageableDefault(value = 10,page = 0,size = 10,sort={"createDate"},direction = Sort.Direction.DESC)Pageable page){
+    public ResultData getMyArticle(@ApiIgnore@PageableDefault(value = 10,page = 0,size = 10,sort={"createDate"},direction = Sort.Direction.DESC)Pageable page){
         Page p=articleService.getMyArticle(page);
         return ResultData.success(p);
     }

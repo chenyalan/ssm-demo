@@ -146,7 +146,12 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-
+       <!-- 连接Oracle-->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.2.0.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

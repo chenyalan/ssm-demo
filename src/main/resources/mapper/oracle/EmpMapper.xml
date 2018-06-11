@@ -126,6 +126,6 @@
     where EMPNO = #{empno,jdbcType=DECIMAL}
   </update>
   <select id="selectAll" resultMap="BaseResultMap">
-    select * from emp
+    select * from scott.emp
   </select>
 </mapper>
