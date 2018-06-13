@@ -9,7 +9,7 @@ import com.zoe.demo.entity.User;
  * 把json格式，类型为object的数据与类数据和json一致的类型
  */
 public class Object2DO {
-      public static<T> T  getDO(Object o, TypeToken<User> token){
+      public static<T> T  getDO(Object o, TypeToken<T> token){
         Gson gson=new Gson();
         T t=gson.fromJson(o.toString(),token.getType());
         return t;
